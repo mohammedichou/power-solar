@@ -20,7 +20,7 @@ var Facteur_ensolleilement = 1.35
 let COUT_TOTAL = (PRIX_POLY_M2 * SPanneau) + PRIX_ONDULEUR + PRIX_RACCORDEMENT
 let PRIX_REVENTE = 1170
 let COUT_ABO = 25
-let PRIME = 1000
+let PRIME = 1170
 
 //Gain conso & Revenu 
 var Prod_Panneau_conso = 0.55 * Conso_Annuelle * Facteur_ensolleilement
