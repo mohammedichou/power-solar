@@ -127,7 +127,11 @@ function createObjTab(){
             if(i == 0){
                 GainAutoConso.push(Gain_conso_annuel + Gain_revente_annul + (PRIME / 5))
             }else{
-                GainAutoConso.push(GainAutoConso[i-1] + (alpha * Gain_conso_annuel) + Gain_revente_annul + (PRIME / 5))
+                if(i<=5){
+                    GainAutoConso.push(GainAutoConso[i-1] + (alpha * Gain_conso_annuel) + Gain_revente_annul + (PRIME / 5))
+                }else{
+                    GainAutoConso.push(GainAutoConso[i-1] + (alpha * Gain_conso_annuel) + Gain_revente_annul)
+                }
                 alpha += 0.03
             }   
         }
