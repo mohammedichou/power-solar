@@ -109,7 +109,7 @@ function createObjTab(){
         var GainVenteTotal = []
         var alpha = 1.03
         var i = 0;
-        for(i = 0 ; i < 24 ; i++){
+        for(i = 0 ; i < 25 ; i++){
             if(i == 0){
                 invests.push(COUT_TOTAL) 
             }else{
@@ -123,7 +123,7 @@ function createObjTab(){
             }
              
         }
-        for(i = 0 ; i < 24 ; i++){
+        for(i = 0 ; i < 25 ; i++){
             if(i == 0){
                 GainAutoConso.push(Gain_conso_annuel + Gain_revente_annul + (PRIME / 5))
             }else{
