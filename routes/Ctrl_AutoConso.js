@@ -107,12 +107,19 @@ function createObjTab(){
         var invests = []
         var GainAutoConso = []
         var GainVenteTotal = []
+        var alpha = 1.03
         var i = 0;
         for(i = 0 ; i < 24 ; i++){
             if(i == 0){
                 invests.push(COUT_TOTAL) 
             }else{
-                invests.push(invests[i-1]+COUT_ABO) 
+                if(i == 9 || i == 19){
+                    invests.push(invests[i-1]+COUT_ABO+PRIX_ONDULEUR) 
+                }else{
+                    invests.push(invests[i-1]+COUT_ABO)
+                }
+                 
+                
             }
              
         }
@@ -120,7 +127,8 @@ function createObjTab(){
             if(i == 0){
                 GainAutoConso.push(Gain_conso_annuel + Gain_revente_annul + (PRIME / 5))
             }else{
-                GainAutoConso.push(GainAutoConso[i-1] + (1.03 * Gain_conso_annuel) + Gain_revente_annul + (PRIME / 5))
+                GainAutoConso.push(GainAutoConso[i-1] + (alpha * Gain_conso_annuel) + Gain_revente_annul + (PRIME / 5))
+                alpha += 0.03
             }   
         }
         for(i = 0 ; i < 25 ; i++){
