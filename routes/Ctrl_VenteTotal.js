@@ -1,4 +1,3 @@
-
 // Donnée de base
 let PRIX_ACHAT_KWH = 0.1579
 let PRIX_VENTE_KWH = 0.1
@@ -28,10 +27,8 @@ var Prod_Panneau_vente = 0.45 * Conso_Annuelle * Facteur_ensolleilement
 var Gain_conso_annuel = Prod_Panneau_conso * PRIX_ACHAT_KWH
 var Gain_revente_annul = Prod_Panneau_vente * PRIX_VENTE_KWH
 
-
-
 module.exports = {
-    Auto_conso: function(req,res){
+    VenteTotal: function(req,res){
         var Tab1 = []
         createObjTab().then(function(res1){
             Tab1 = res1
@@ -43,7 +40,7 @@ module.exports = {
             })
         })
     },
-    Auto_conso_2: function(req,res){
+    VenteTotal2: function(req,res){
         var Tab1 = []
         console.log(req.body.conso)
         console.log(req.body.fcorrect)
@@ -105,7 +102,7 @@ function create_OBJ_Donnée(){
 function createObjTab(){
     return new Promise((resolve) => {
         var invests = []
-        var GainAutoConso = []
+        var GainVenteTotal = []
         var alpha = 1.03
         var i = 0;
         for(i = 0 ; i < 25 ; i++){
@@ -121,26 +118,21 @@ function createObjTab(){
                 
             }
              
-        }
+        }   
         for(i = 0 ; i < 25 ; i++){
             if(i == 0){
-                GainAutoConso.push(Gain_conso_annuel + Gain_revente_annul + (PRIME / 5))
+                GainVenteTotal.push(Conso_Annuelle * PRIX_VENTE_TOTAL_KWH)
             }else{
-                if(i<5){
-                    GainAutoConso.push(GainAutoConso[i-1] + (alpha * Gain_conso_annuel) + Gain_revente_annul + (PRIME / 5))
-                }else{
-                    GainAutoConso.push(GainAutoConso[i-1] + (alpha * Gain_conso_annuel) + Gain_revente_annul)
-                }
-                alpha += 0.03
-            }   
+                GainVenteTotal.push(GainVenteTotal[0]*(i+1))
+            }
+             
         }
         var obj = {"Investissement" : invests,
-                   "GainsAutoConso" : GainAutoConso}
+                   "GainVenteTotale" : GainVenteTotal}
 
         resolve(obj)
     })
 }
-
 function reloadData (conso, fcorrect, fensol){
     return new Promise((resolve) => {
         facteur_correction = fcorrect
