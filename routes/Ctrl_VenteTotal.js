@@ -45,22 +45,28 @@ module.exports = {
         console.log(req.body.conso)
         console.log(req.body.fcorrect)
         console.log(req.body.fensol)
-        reloadData(req.body.conso,req.body.fcorrect,req.body.fensol).then(function(res1){
-            if(res1 === "OK"){
-                createObjTab().then(function(res1){
-                    Tab1 = res1
-                    create_OBJ_Donnée().then(function(res2){
-                        res.status(200).json({"resultat" : 
-                        {"Tab" : Tab1,
-                        "valeur" : res2}
+
+        if(req.body.conso != undefined && req.body.fcorrect != undefined && req.body.fensol != undefined){
+                reloadData(req.body.conso,req.body.fcorrect,req.body.fensol).then(function(res1){
+                    if(res1 === "OK"){
+                        createObjTab().then(function(res1){
+                            Tab1 = res1
+                            create_OBJ_Donnée().then(function(res2){
+                                res.status(200).json({"resultat" : 
+                                {"Tab" : Tab1,
+                                "valeur" : res2}
+                                })
+                            })
                         })
-                    })
+                    }
+                    else{
+                        res.status(400).json({"Error" : "POST KO"})
+                    }
                 })
-            }
-            else{
-                res.status(400).json({"Error" : "POST KO"})
-            }
-        })
+        }else{
+            res.status(400).json({"Error" : "params null"})
+        }
+        
 
         
     }
